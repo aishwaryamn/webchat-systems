@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CCA-By Uday Aditya Kurapati and Aishwarya Marghatta Nandeesh</title>
+        <script src="https://udayton-cloud.bitbucket.io/clock.js"></script>
+        <link rel="stylesheet" href="https://udayton-cloud.bitbucket.io/style1.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+                crossorigin="anonymous"></script>
+        
+        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script>
+            $( function() {
+            $( "#from_date" ).datepicker({dateFormat: 'MM d, yy'});
+            $( "#to_date" ).datepicker({dateFormat: 'MM d, yy'});
+                } );
+        </script>
+        <style>
+            .button {
+                background-color: #1699E3; /* blue */
+                border: none;
+                color: white;
+                padding: 5px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 12px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+            .round {border-radius: 8px;}
+            #response {background-color: #ff9800;} /* orange */
+            #response1 {background-color: #ff9800;}
+        </style>
+    </head>
+    <body>
+
+		 
+        <div class="container wrapper ">
+		<div id="top">
+        <h1>Sprint 1: Cloud Computing Applications</h1>
+        <h2>Presented By team members: Uday Aditya Kurapati and Aishwarya Marghatta Nandeesh</h2>
+        <h2>ID: 101650466, 101650125</h2>
+        <div id="email" onclick="showhideEmail()">Show my Email</div>
+        <script src="email.js"></script>
+        </div>
+	
+
+        <div class="wrapper">
+            <div id="menubar">
+         
+        <p>Project Sprint-1</p>
+        <canvas id="analog-clock" width="150" height="150" style="background-color:#735"></canvas>
+            </div>
+
+        <div id="main"> 
+       
+        <div id="digit-clock"></div>
+        <script>
+            function displayTime() {
+                document.getElementById('digit-clock').innerHTML = "Current time: "+new Date();
+            }
+            setInterval(displayTime, 500);
+        </script>
+
+        
+        <script>
+            var canvas = document.getElementById("analog-clock");
+            var ctx = canvas.getContext("2d");
+            var radius = canvas.height / 2;
+            ctx.translate(radius, radius);
+            radius=radius*0.90
+            setInterval(drawClock, 1000);
+
+            function drawClock()
+            {
+                drawFace(ctx, radius);
+                drawNumbers(ctx, radius);
+                drawTime(ctx, radius);
+            }
+            </script>
+            
+          
+        
+        <!--For indian zodiac-->
+        
+        <form action="age" method="GET">
+            <h3>Indian Zodiac Sign Microservices</h3>
+            <hr>
+            Enter Year of Birth: <input name="year" id="year">
+            <input class="button round" type="button" value="Get your Age and Indian Zodiac" onclick="getAge()">
+        </form>
+
+        <div id="response"></div>
+
+        <form>
+        <h3>Date Difference to caluclate Days and Weeks Microservices</h3>
+        <hr>
+        <form>
+        Start date: <input name="from_date" id="from_date"> <br>
+        End date: <input name="to_date" id="to_date">
+        <input class="button round" type="button" value="Get Days and Weeks" onclick="getDaysWeeks()">
+        </form>
+
+        <div id="response1"></div>
+
+        <script>
+            function getAge(){
+                var input = $("#year").val();
+                if(input.length == 0) return;
+            $.get("age?year="+input,
+                    function(result){
+                        $("#response").html("Response from Server: " +result);
+                });
+                $("#year").val("");
+            }
+        </script>
+
+        <script>
+          function getDaysWeeks() {
+        var from_date = $("#from_date").val();
+        var to_date = $("#to_date").val();
+        if (from_date.length == 0 || to_date.length == 0) {
+            return;
+        }
+        $.get("https://adi-aish-microservice2.herokuapp.com/datediff?from_date="+from_date+"&to_date="+to_date,
+               function(result) {
+                 $("#response1" ).html( "Response from server:" + result );
+               }
+        );
+        $("#to_date").val("");
+        $("#from_date").val("");
+    }
+    </script>
+       
+        </div>
+        </div>
+        </div>
+        
+    </body>
+</html>
