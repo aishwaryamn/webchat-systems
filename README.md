@@ -4,8 +4,6 @@
 
 ## INSTRUCTOR - Dr.Phu Phung
 
-## TEAM INFORMATION:
-
 ### MEMBER: Aishwarya Marghatta Nandeesh
 
 
